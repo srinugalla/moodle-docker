@@ -10,8 +10,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     git clone git://git.moodle.org/moodle.git && cd moodle && \
-    git branch --track MOODLE_405_STABLE origin/MOODLE_405_STABLE && \
-    git checkout MOODLE_405_STABLE && \
+    git branch --track MOODLE_404_STABLE origin/MOODLE_404_STABLE && \
+    git checkout MOODLE_404_STABLE && \
     cp -rf ./* /var/www/html/
 
 # Set PHP settings for Moodle: max_input_vars and OPcache
@@ -34,12 +34,11 @@ WORKDIR /var/www/html
 RUN chown -R www-data:www-data /var/www/ && chmod -R 755 /var/www
 
 # Add cron job for Moodle
-RUN echo "* * * * * www-data /usr/bin/php /var/www/html/admin/cli/cron.php >/dev/null 2>&1" > /etc/cron.d/moodle-cron && \
+RUN echo "* * * * * /usr/bin/php /var/www/html/admin/cli/cron.php >/dev/null 2>&1" > /etc/cron.d/moodle-cron && \
     chmod 0644 /etc/cron.d/moodle-cron && \
     crontab /etc/cron.d/moodle-cron
 
 # Start cron service and Apache
-COPY --from=php:8.3-apache /usr/sbin/cron /usr/sbin/cron
 CMD ["sh", "-c", "service cron start && apache2-foreground"]
 
 # Expose port 80

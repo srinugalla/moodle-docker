@@ -13,8 +13,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
 # Clone the Moodle repository and check out the desired branch
 RUN git clone git://git.moodle.org/moodle.git && \
     cd moodle && \
-    git branch --track MOODLE_404_STABLE origin/MOODLE_404_STABLE && \
-    git checkout MOODLE_404_STABLE
+    git branch --track MOODLE_500_STABLE origin/MOODLE_500_STABLE && \
+    git checkout MOODLE_500_STABLE
 
 # Stage 2: Final stage
 FROM php:8.3-apache

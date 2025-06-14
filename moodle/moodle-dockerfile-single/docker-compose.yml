@@ -2,35 +2,46 @@ services:
   moodleapp:
     build:
       context: .
-      dockerfile: Moodle
-    image: moodle-web:1.0
-    container_name: moodle-web
+    image: moodleapp:1.0
+    container_name: moodleapp
     ports:
       - 80:80
     volumes:
       - moodledata:/var/www/moodledata
+      # - moodleconfig:/var/www/html/config.php:rw
     depends_on:
-      - postgres
-  
-  postgres:
-    image: postgres:17-alpine
+      - moodledb
+  # MySQL DB Service
+  moodledb:
+    image: mysql:8.4.5
+    container_name: clouddb
     environment:
-      - POSTGRES_DB=moodle
-      - POSTGRES_USER=moodle_user
-      - POSTGRES_PASSWORD=moodle_password
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - clouddbdata:/var/lib/mysql
+    # environment:
+      # - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      # - MYSQL_DATABASE=${MYSQL_DATABASE}
 
-  pgadmin:
-    image: dpage/pgadmin4
+  # phpmyadmin to Manage MySQL DB
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
     ports:
-      - "81:80"
+      - "8081:80"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
+      PMA_HOST: clouddb
+      PMA_PORT: 3306
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
     depends_on:
-      - postgres
+      - moodledb
 
 volumes:
-  pgdata:
+  clouddbdata:
   moodledata:
+  moodleconfig:
