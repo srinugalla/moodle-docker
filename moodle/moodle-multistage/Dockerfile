@@ -1,7 +1,7 @@
 # Stage 1: Builder stage
 FROM php:8.3-cli AS builder
 
-# Install dependencies for building
+# Install dependencies for building PHP extensions
 RUN apt-get update && \
     apt-get install -y --no-install-recommends unzip git curl libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libicu-dev libxml2-dev
 
