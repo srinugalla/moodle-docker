@@ -16,7 +16,7 @@ RUN git clone git://git.moodle.org/moodle.git && \
     git branch --track MOODLE_500_STABLE origin/MOODLE_500_STABLE && \
     git checkout MOODLE_500_STABLE
 
-# Stage 2: Final stage
+# Stage 2: Final stage.
 FROM php:8.3-apache
 
 # Copy built PHP extensions and configurations from the builder stage

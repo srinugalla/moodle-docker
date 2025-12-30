@@ -11,7 +11,7 @@ services:
       - moodleconfig:/var/www/html/config.php
     depends_on:
       - moodledb
-  # MySQL DB Service
+  # MySQL DB Service.
   moodledb:
     image: mysql:8.4.5
     container_name: clouddb
