@@ -30,17 +30,17 @@ jobs:
       # Step 4: Build Moodle Docker image with cache
       - name: Build Moodle Docker Image
         run: |
-          docker-compose -f docker-compose.yml build --pull
+          docker compose -f docker-compose.yml build --pull
 
       # Step 5: Run basic Moodle checks
       - name: Run Moodle CLI checks
         run: |
-          docker-compose -f docker-compose.yml run --rm moodle php admin/cli/checks.php
+          docker compose -f docker-compose.yml run --rm moodle php admin/cli/checks.php
 
       # Step 6: Push images to Docker Hub (optional)
       - name: Push Docker Images
         run: |
-          docker-compose -f docker-compose.yml push
+          docker compose -f docker-compose.yml push
 
       # Step 7: Deploy to Remote Server via SSH
       - name: Deploy to Remote Server
