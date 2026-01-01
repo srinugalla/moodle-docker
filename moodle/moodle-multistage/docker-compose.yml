@@ -2,7 +2,7 @@ services:
   moodleapp:
     build:
       context: .
-    image: moodleapp:1.0
+    image: srinugalla/moodleapp:1.0
     container_name: moodleapp
     ports:
       - 80:80
