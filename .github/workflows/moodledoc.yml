@@ -59,9 +59,8 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
           script: |
-            cd /opt/moodle/moodle-multistage
+            cd /opt/moodle/moodle-docker/moodle/moodle-multistage
             git pull origin main
             docker compose down
             docker compose up -d --build
             docker system prune -f
-
