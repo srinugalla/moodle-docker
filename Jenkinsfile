@@ -15,9 +15,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh '''cd moodle-multistage
-docker build -f Dockerfile .
-'''
+        sh 'docker build -f moodle-multistage/Dockerfile .'
       }
     }
 
