@@ -25,7 +25,8 @@ pipeline {
         DOCKERHUB_PASSWORD = 'Vennela@124'
       }
       steps {
-        sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD'
+        sh '''echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
+'''
       }
     }
 
