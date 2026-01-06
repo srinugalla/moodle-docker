@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Check Out') {
       steps {
-        git(url: 'https://github.com/srinugalla/moodle-docker/tree/main/moodle', branch: 'main')
+        git(url: 'https://github.com/srinugalla/moodle-docker.git', branch: 'main')
       }
     }
 
