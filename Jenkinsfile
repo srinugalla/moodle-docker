@@ -31,7 +31,7 @@ pipeline {
 
     stage('Push') {
       steps {
-        sh 'docker push srinugalla/moodle-multistage:latest'
+        sh 'docker push srinugalla/moodle-multistage'
       }
     }
 
