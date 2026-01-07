@@ -30,5 +30,11 @@ pipeline {
       }
     }
 
+    stage('Push') {
+      steps {
+        sh 'docker push srinugalla/moodleapp:latest'
+      }
+    }
+
   }
 }
