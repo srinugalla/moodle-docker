@@ -22,6 +22,9 @@ pipeline {
     }
 
     stage('Docker login') {
+      environment {
+        DOCKERHUB_USER = 'srinugalla'
+      }
       steps {
         sh '''echo "$DOCKERHUB_PASSWORD" | docker login \\
   -u "$DOCKERHUB_USER" \\
@@ -36,5 +39,8 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    USER = 'srinugalla'
   }
 }
