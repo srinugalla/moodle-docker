@@ -35,19 +35,19 @@ jobs:
 
       # Step 5: Build Moodle Docker images
       - name: Build Moodle Docker Image
-        working-directory: moodle/moodle-multistage
+        working-directory: moodle-multistage
         run: |
           docker compose build --pull
 
       # Step 6: Run Moodle CLI checks (optional but good)
       - name: Run Moodle CLI checks
-        working-directory: moodle/moodle-multistage
+        working-directory: moodle-multistage
         run: |
           docker compose run --rm moodle php admin/cli/checks.php || true
 
       # Step 7: Push images to Docker Hub (optional)
       - name: Push Docker Images
-        working-directory: moodle/moodle-multistage
+        working-directory: moodle-multistage
         run: |
           docker compose push
 
